@@ -40,6 +40,7 @@ public class Menu : MonoBehaviour
 
 	void BarSelected()
 	{
+		//sets font size and bar size for the bar selected
 		if(Input.GetKeyDown(KeyCode.S) && barSelected <= 2)
 		{
 			if(menu != "main" && barSelected <= 1 && menu != "options")
@@ -81,6 +82,8 @@ public class Menu : MonoBehaviour
 
 	void Enter()
 	{
+		//checks which bar is selected and navigates to different menus
+
 		if(Input.GetKeyDown(KeyCode.Return))
 		{
 			if(menu == "main")
@@ -180,7 +183,6 @@ public class Menu : MonoBehaviour
 		text1.transform.localPosition = new Vector3(0.5f,-0.5f,10);
 		text2.transform.localPosition = new Vector3(0.5f,-0.66f,10);
 		text3.transform.localPosition = new Vector3(0.5f,-0.82f,10);
-
 	}
 
 	void playMenu()
