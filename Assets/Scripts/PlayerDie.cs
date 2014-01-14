@@ -6,10 +6,13 @@ public class PlayerDie : MonoBehaviour
 	private Controller controller;
 	private Collider otherThing;
 	private PlayerSlot playerSlot;
-	private GameController gc;
+	private GameController gameController;
 
 	void Start()
 	{
+		GameObject gc = GameObject.FindWithTag("GameController");
+		gameController = gc.GetComponent<GameController>();
+
 		controller = GetComponent<Controller>();
 		playerSlot = GetComponent<PlayerSlot>();
 	}
@@ -32,24 +35,24 @@ public class PlayerDie : MonoBehaviour
 
 		if(playerSlot.playerSlot == 1 && (otherThing.gameObject.tag == "p2bullet" || otherThing.gameObject.tag == "p3bullet" || otherThing.gameObject.tag == "p4bullet"))
 		{
-			gc.playerCount -= 1;
+			gameController.playerCount -= 1;
 			if(controller.crosshair != null)
 				Destroy(controller.crosshair);
 			Destroy(gameObject);
 		}
 		if(playerSlot.playerSlot == 2 && (otherThing.gameObject.tag == "p1bullet" || otherThing.gameObject.tag == "p3bullet" || otherThing.gameObject.tag == "p4bullet"))
 		{
-			gc.playerCount -= 1;
+			gameController.playerCount -= 1;
 			Destroy(gameObject);
 		}
 		if(playerSlot.playerSlot == 3 && (otherThing.gameObject.tag == "p1bullet" || otherThing.gameObject.tag == "p2bullet" || otherThing.gameObject.tag == "p4bullet"))
 		{
-			gc.playerCount -= 1;
+			gameController.playerCount -= 1;
 			Destroy(gameObject);
 		}
 		if(playerSlot.playerSlot == 4 && (otherThing.gameObject.tag == "p1bullet" || otherThing.gameObject.tag == "p2bullet" || otherThing.gameObject.tag == "p3bullet"))
 		{
-			gc.playerCount -= 1;
+			gameController.playerCount -= 1;
 			Destroy(gameObject);
 		}
 	}

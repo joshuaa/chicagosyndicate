@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 	public GUIText usableText;
 
 	private Animator animator;
+	public Character character;
 	private Controller controller;
 	private PlayerDie playerDie;
 	private PlayerSlot playerSlot;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		animator = GetComponent<Animator>();
+		character = GetComponent<Character>();
 		controller = GetComponent<Controller>();
 		playerDie = GetComponent<PlayerDie>();
 		playerSlot = GetComponent<PlayerSlot>();
@@ -28,6 +30,8 @@ public class Player : MonoBehaviour
 
 		animator.UpdateAnimationName();
 		animator.Animate();
+
+		character.UpdateCharacter();
 
 		controller.Controlls();
 

@@ -5,6 +5,7 @@ public class Controller : MonoBehaviour
 {
 	private PlayerSlot ps;
 	private Weapon weapon;
+	private Animator animator;
 
 	public GameObject bullet;
 	public GameObject crosshair;
@@ -26,6 +27,7 @@ public class Controller : MonoBehaviour
 	{
 		ps = GetComponent<PlayerSlot>();
 		weapon = GetComponent<Weapon>();
+		animator = GetComponent<Animator>();
 	}
 
 	public void Controlls()
@@ -56,6 +58,12 @@ public class Controller : MonoBehaviour
 			if(ps.playerSlot == 1)
 				P1XB();
 		}
+	}
+
+	public void Shoot()
+	{
+		nextFire = Time.time + weapon.fireRate;
+		Instantiate(bullet, transform.position, transform.rotation);
 	}
 
 	public void P1CK()
@@ -92,8 +100,15 @@ public class Controller : MonoBehaviour
 		//shoot(x)
 		if(Input.GetKey(KeyCode.X) && Time.time > nextFire)
 		{
-			nextFire = Time.time + weapon.fireRate;
-			Instantiate(bullet, transform.position, transform.rotation);
+			if(weapon.weaponName == "hands")
+			{
+
+			}
+			else
+			{
+				nextFire = Time.time + weapon.fireRate;
+				Instantiate(bullet, transform.position, transform.rotation);
+			}
 		}
 	}
 

@@ -9,8 +9,8 @@ public class Animator : MonoBehaviour
 
 	private int frameNum = 0;
 
-	private float frameX;
-	private float frameY;
+	public float frameX;
+	public float frameY;
 	private float totalframesX;
 	private float totalframesY;
 	private float nextFrame = 0;
@@ -26,7 +26,6 @@ public class Animator : MonoBehaviour
 		weapon = GetComponent<Weapon>();
 
 		frameX = 1;
-		frameY = ps.playerSlot + 2;
 		frameNum = 1;
 		totalframesX = 16;
 		totalframesY = 8;

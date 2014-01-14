@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Menu : MonoBehaviour 
 {
+	public GUIText title;
+
 	public GUIText text1;
 	public GUIText text2;
 	public GUIText text3;
@@ -10,6 +12,36 @@ public class Menu : MonoBehaviour
 	public GameObject bar1;
 	public GameObject bar2;
 	public GameObject bar3;
+
+	public GameObject pickPlayer;
+
+	public GUIText Playtext1;
+	public GUIText Playtext2;
+	public GUIText Playtext3;
+	public GUIText Playtext4;
+
+	public GameObject Playbar1;
+	public GameObject Playbar2;
+	public GameObject Playbar3;
+	public GameObject Playbar4;
+
+	public GameObject Avatar1;
+	public GameObject Avatar2;
+	public GameObject Avatar3;
+	public GameObject Avatar4;
+	public GameObject Avatar5;
+	public GameObject Avatar6;
+	public GameObject Avatar7;
+	public GameObject Avatar8;
+	public GameObject Avatar9;
+	public GameObject Avatar10;
+	public GameObject Avatar11;
+	public GameObject Avatar12;
+
+	public GameObject cursor1;
+	public GameObject cursor2;
+	public GameObject cursor3;
+	public GameObject cursor4;
 
 	private int barSelected;
 
@@ -25,7 +57,10 @@ public class Menu : MonoBehaviour
 		if(menu == "main")
 			mainMenu();
 		if(menu == "play")
+		{
+			title.text = "Chicago Syndicate";
 			playMenu();
+		}
 		if(menu == "level")
 			levelMenu();
 		if(menu == "options")
@@ -35,11 +70,21 @@ public class Menu : MonoBehaviour
 
 		BarSelected();
 		Enter();
+		Move();
+	}
 
+	void Move()
+	{
+		float h = Input.GetAxis("Horizontal")/3;
+		float v = Input.GetAxis("Vertical")/3;
+
+		cursor1.transform.Translate(h,v,0);
 	}
 
 	void BarSelected()
 	{
+		title.text = "Chicago Syndicate";
+		pickPlayer.transform.localPosition = new Vector3(0,-100,0);
 		//sets font size and bar size for the bar selected
 		if(Input.GetKeyDown(KeyCode.S) && barSelected <= 2)
 		{
@@ -48,36 +93,51 @@ public class Menu : MonoBehaviour
 			else if(menu == "main")
 				barSelected += 1;
 		}
-		if(Input.GetKeyDown(KeyCode.W) && barSelected >= 2)
+		if(menu != "play")
+		{
+			if(Input.GetKeyDown(KeyCode.W) && barSelected >= 2)
 			barSelected -= 1;
 
-		if(barSelected == 1)
-		{	
-			text1.fontSize = 75;
-			text2.fontSize = 50;
-			text3.fontSize = 50;
-			bar1.transform.localScale = new Vector3(18,3,1);
-			bar2.transform.localScale = new Vector3(16,2,1);
-			bar3.transform.localScale = new Vector3(16,2,1);
+			if(barSelected == 1)
+			{	
+				text1.fontSize = 75;
+				text2.fontSize = 50;
+				text3.fontSize = 50;
+				bar1.transform.localScale = new Vector3(18,3,1);
+				bar2.transform.localScale = new Vector3(16,2,1);
+				bar3.transform.localScale = new Vector3(16,2,1);
+			}
+			if(barSelected == 2)
+			{	
+				text1.fontSize = 50;
+				text2.fontSize = 75;
+				text3.fontSize = 50;
+				bar1.transform.localScale = new Vector3(16,2,1);
+				bar2.transform.localScale = new Vector3(18,3,1);
+				bar3.transform.localScale = new Vector3(16,2,1);
+			}
+			if(barSelected == 3)
+			{
+				text1.fontSize = 50;
+				text2.fontSize = 50;
+				text3.fontSize = 75;
+				bar1.transform.localScale = new Vector3(16,2,1);
+				bar2.transform.localScale = new Vector3(16,2,1);
+				bar3.transform.localScale = new Vector3(18,3,1);
+			}
 		}
-		if(barSelected == 2)
-		{	
-			text1.fontSize = 50;
-			text2.fontSize = 75;
-			text3.fontSize = 50;
-			bar1.transform.localScale = new Vector3(16,2,1);
-			bar2.transform.localScale = new Vector3(18,3,1);
-			bar3.transform.localScale = new Vector3(16,2,1);
+		else
+		{
+			title.text = "";
+			pickPlayer.transform.localPosition = new Vector3(0,0,0);
+			text1.text = "";
+			text2.text = "";
+			text3.text = "";
+			bar1.transform.localScale = new Vector3(0,0,0);
+			bar2.transform.localScale = new Vector3(0,0,0);
+			bar3.transform.localScale = new Vector3(0,0,0);
 		}
-		if(barSelected == 3)
-		{	
-			text1.fontSize = 50;
-			text2.fontSize = 50;
-			text3.fontSize = 75;
-			bar1.transform.localScale = new Vector3(16,2,1);
-			bar2.transform.localScale = new Vector3(16,2,1);
-			bar3.transform.localScale = new Vector3(18,3,1);
-		}
+		
 	}
 
 	void Enter()
@@ -106,20 +166,7 @@ public class Menu : MonoBehaviour
 			}
 			else if(menu == "play")
 			{
-				if(barSelected == 1)
-				{
-					barSelected = 1;
-					menu = "level";
-				}
-				else if(barSelected == 2)
-				{
-					barSelected = 1;
-					menu = "main";
-				}
-				else if(barSelected == 3)
-				{
-					barSelected = 2;
-				}
+				menu = "level";
 			}
 			else if(menu == "level")
 			{
@@ -187,14 +234,14 @@ public class Menu : MonoBehaviour
 
 	void playMenu()
 	{
-		bar1.transform.localPosition = new Vector3(0,0,20);
-		bar2.transform.localPosition = new Vector3(0,-3,20);
+		bar1.transform.localPosition = new Vector3(0,-100,20);
+		bar2.transform.localPosition = new Vector3(0,-100,20);
 		bar3.transform.localPosition = new Vector3(0f,-100,20);
 		text1.transform.localPosition = new Vector3(0.5f,-0.5f,10);
 		text2.transform.localPosition = new Vector3(0.5f,-0.66f,10);
 		text3.transform.localPosition = new Vector3(0.5f,-0.82f,10);
-		text1.text = "Level Select";
-		text2.text = "Back";
+		text1.text = "";
+		text2.text = "";
 		text3.text = "";
 	}
 
