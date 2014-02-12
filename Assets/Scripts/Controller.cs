@@ -62,8 +62,11 @@ public class Controller : MonoBehaviour
 
 	public void Shoot()
 	{
-		nextFire = Time.time + weapon.fireRate;
-		Instantiate(bullet, transform.position, transform.rotation);
+		if(Time.time > nextFire)
+		{
+			nextFire = Time.time + weapon.fireRate;
+			Instantiate(bullet, sprite.transform.position, sprite.transform.rotation);
+		}
 	}
 
 	public void P1CK()
@@ -102,12 +105,11 @@ public class Controller : MonoBehaviour
 		{
 			if(weapon.weaponName == "hands")
 			{
-
+				
 			}
 			else
 			{
-				nextFire = Time.time + weapon.fireRate;
-				Instantiate(bullet, transform.position, transform.rotation);
+				Shoot();
 			}
 		}
 	}
@@ -142,10 +144,16 @@ public class Controller : MonoBehaviour
 			transform.Translate(0,0,weapon.movementSpeed*Time.deltaTime);
 		}
 		//shoot(M)
-		if(Input.GetKey(KeyCode.M) && Time.time > nextFire)
+		if(Input.GetKey(KeyCode.M))
 		{
-			nextFire = Time.time + weapon.fireRate;
-			Instantiate(bullet, transform.position, transform.rotation);
+			if(weapon.weaponName == "hands")
+			{
+
+			}
+			else
+			{
+				Shoot();
+			}
 		}
 	}
 
@@ -181,8 +189,14 @@ public class Controller : MonoBehaviour
 		//shoot(right shift)
 		if(Input.GetKey(KeyCode.RightShift) && Time.time > nextFire)
 		{
-			nextFire = Time.time + weapon.fireRate;
-			Instantiate(bullet, transform.position, transform.rotation);
+			if(weapon.weaponName == "hands")
+			{
+
+			}
+			else
+			{
+				Shoot();
+			}
 		}
 	}
 
@@ -218,8 +232,14 @@ public class Controller : MonoBehaviour
 		//shoot(num 0)
 		if(Input.GetKey(KeyCode.Keypad0) && Time.time > nextFire)
 		{
-			nextFire = Time.time + weapon.fireRate;
-			Instantiate(bullet, transform.position, transform.rotation);
+			if(weapon.weaponName == "hands")
+			{
+
+			}
+			else
+			{
+				Shoot();
+			}
 		}
 	}
 
@@ -236,10 +256,16 @@ public class Controller : MonoBehaviour
 		transform.Translate(h,0,v);
 		//sprite.transform.rotation = Quaternion.Euler(0,sprite.transform.rotation.y,0);
 		sprite.transform.LookAt(mouse);
-		if(Input.GetButton("Fire1") && Time.time > nextFire)
+		if(Input.GetButton("Fire1"))
 		{
-			nextFire = Time.time + weapon.fireRate;
-			Instantiate(bullet, sprite.transform.position, sprite.transform.rotation);
+			if(weapon.weaponName == "hands")
+			{
+
+			}
+			else
+			{
+				Shoot();
+			}
 		}
 	}
 

@@ -13,36 +13,6 @@ public class Menu : MonoBehaviour
 	public GameObject bar2;
 	public GameObject bar3;
 
-	public GameObject pickPlayer;
-
-	public GUIText Playtext1;
-	public GUIText Playtext2;
-	public GUIText Playtext3;
-	public GUIText Playtext4;
-
-	public GameObject Playbar1;
-	public GameObject Playbar2;
-	public GameObject Playbar3;
-	public GameObject Playbar4;
-
-	public GameObject Avatar1;
-	public GameObject Avatar2;
-	public GameObject Avatar3;
-	public GameObject Avatar4;
-	public GameObject Avatar5;
-	public GameObject Avatar6;
-	public GameObject Avatar7;
-	public GameObject Avatar8;
-	public GameObject Avatar9;
-	public GameObject Avatar10;
-	public GameObject Avatar11;
-	public GameObject Avatar12;
-
-	public GameObject cursor1;
-	public GameObject cursor2;
-	public GameObject cursor3;
-	public GameObject cursor4;
-
 	private int barSelected;
 
 	public string menu = "main";
@@ -70,21 +40,11 @@ public class Menu : MonoBehaviour
 
 		BarSelected();
 		Enter();
-		Move();
-	}
-
-	void Move()
-	{
-		float h = Input.GetAxis("Horizontal")/3;
-		float v = Input.GetAxis("Vertical")/3;
-
-		cursor1.transform.Translate(h,v,0);
 	}
 
 	void BarSelected()
 	{
 		title.text = "Chicago Syndicate";
-		pickPlayer.transform.localPosition = new Vector3(0,-100,0);
 		//sets font size and bar size for the bar selected
 		if(Input.GetKeyDown(KeyCode.S) && barSelected <= 2)
 		{
@@ -93,7 +53,7 @@ public class Menu : MonoBehaviour
 			else if(menu == "main")
 				barSelected += 1;
 		}
-		if(menu != "play")
+		if(menu != "")
 		{
 			if(Input.GetKeyDown(KeyCode.W) && barSelected >= 2)
 			barSelected -= 1;
@@ -128,6 +88,7 @@ public class Menu : MonoBehaviour
 		}
 		else
 		{
+			/*
 			title.text = "";
 			pickPlayer.transform.localPosition = new Vector3(0,0,0);
 			text1.text = "";
@@ -136,6 +97,7 @@ public class Menu : MonoBehaviour
 			bar1.transform.localScale = new Vector3(0,0,0);
 			bar2.transform.localScale = new Vector3(0,0,0);
 			bar3.transform.localScale = new Vector3(0,0,0);
+			*/
 		}
 		
 	}
