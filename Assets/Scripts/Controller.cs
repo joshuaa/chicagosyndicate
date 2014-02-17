@@ -247,8 +247,8 @@ public class Controller : MonoBehaviour
 	{
 		h = Input.GetAxis("Horizontal")*weapon.movementSpeed*Time.deltaTime;
 		v = Input.GetAxis("Vertical")*weapon.movementSpeed*Time.deltaTime;
-		x += (Input.GetAxis("Mouse X")*10)*Time.deltaTime;
-		y += (Input.GetAxis("Mouse Y")*10)*Time.deltaTime;
+		x += (Input.GetAxis("Mouse X")*20)*Time.deltaTime;
+		y += (Input.GetAxis("Mouse Y")*20)*Time.deltaTime;
 		mouse = new Vector3 (x,1,y);
 
 		crosshair.transform.position = mouse + new Vector3(0,3,0);

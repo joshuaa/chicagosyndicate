@@ -41,24 +41,22 @@ public class GameController : MonoBehaviour
 		{
 			if(player1 != null)
 			{
-				winnerText.color = Color.red;
 				whoWon = "P1";
 			}
 			else if(player2 != null)
 			{
-				winnerText.color = Color.cyan;
 				whoWon = "P2";
 			}
 			else if(player3 != null)
 			{
-				winnerText.color = Color.green;
 				whoWon = "P3";
 			}
 			else
 			{
-				winnerText.color = Color.magenta;
 				whoWon = "P4";
 			}
+
+			winnerText.color = Color.white;
 			winnerText.text = whoWon + " IS THE WINNER!";
 			restartText.text = "Press R for a rematch!";
 			Time.timeScale = 0.1f;
