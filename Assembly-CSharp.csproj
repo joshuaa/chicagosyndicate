@@ -46,19 +46,19 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Animator.cs" />
-     <Compile Include="Assets\Scripts\Bullet.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\Character.cs" />
-     <Compile Include="Assets\Scripts\Controller.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\InfiniteOffsetChange.cs" />
-     <Compile Include="Assets\Scripts\Menu.cs" />
-     <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\PlayerDie.cs" />
-     <Compile Include="Assets\Scripts\PlayerSlot.cs" />
-     <Compile Include="Assets\Scripts\ScreenShake.cs" />
-     <Compile Include="Assets\Scripts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Game\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Game\GameController.cs" />
+     <Compile Include="Assets\Scripts\Game\Menu.cs" />
+     <Compile Include="Assets\Scripts\Player\Animator.cs" />
+     <Compile Include="Assets\Scripts\Player\Character.cs" />
+     <Compile Include="Assets\Scripts\Player\Controller.cs" />
+     <Compile Include="Assets\Scripts\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerDie.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerSlot.cs" />
+     <Compile Include="Assets\Scripts\Player\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Utility\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Utility\InfiniteOffsetChange.cs" />
+     <Compile Include="Assets\Scripts\Utility\ScreenShake.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
