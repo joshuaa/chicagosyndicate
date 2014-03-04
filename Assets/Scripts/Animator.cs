@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using System.Collections;
 
 public class Animator : MonoBehaviour 
 {
 	public GameObject spriteQuad;
+	public GameObject spriteWeapon;
 	private PlayerSlot ps;
 	private Weapon weapon;
 
@@ -33,17 +34,19 @@ public class Animator : MonoBehaviour
 
 	public void UpdateAnimationName()
 	{
+		
 		//if not moving, make it idle. if it is moving and not shooting, make it moving. if it is shooting, make it firing.
-		if(Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0 && !Input.GetButton("Fire1"))
+		if(Input.GetAxis("P1 Left Thumbstick Horizontal") == 0 && Input.GetAxis("P1 Left Thumbstick Horizontal") == 0 && Input.GetAxis("P1 Triggers") == 0)
 			animation = "idle";
-		else if(!Input.GetButton("Fire1"))
-			animation = "moving";
-		else
+		else if(Input.GetAxis("P1 Triggers") < 0)
 			animation = "firing";
+		else
+			animation = "moving";
 	}
 
 	public void Animate()
 	{
+		float averageSpeed = Mathf.Abs(Input.GetAxis("P1 Left Thumbstick Horizontal")) + Mathf.Abs(Input.GetAxis("P1 Left Thumbstick Vertical"));
 		float x = frameX/totalframesX;
 		float y = frameY/totalframesY;
 
@@ -53,9 +56,15 @@ public class Animator : MonoBehaviour
 		{
 			if(weapon.weaponName == "thompson")
 			{
+				spriteWeapon.renderer.material.mainTextureOffset = new Vector2(0,0);
+
 				if(animation == "moving" && Time.time > nextFrame)
 				{
-					frameRate = 0.3f;
+					Debug.Log(averageSpeed);
+					if(averageSpeed > 0.5)
+						frameRate = 0.2f;
+					else
+						frameRate = 0.7f;
 					nextFrame = Time.time + frameRate;
 
 					if(frameNum == 1)
@@ -85,7 +94,7 @@ public class Animator : MonoBehaviour
 				}
 				if(animation == "firing" && Time.time > nextFrame)
 				{
-					frameRate = 0.05f;
+					frameRate = weapon.fireRate/2;
 					nextFrame = Time.time + frameRate;
 
 					if(frameNum == 1)
@@ -110,9 +119,11 @@ public class Animator : MonoBehaviour
 			}
 			else if(weapon.weaponName == "hands")
 			{
+				spriteWeapon.renderer.material.mainTextureOffset = new Vector2(1,0);
+
 				if(animation == "moving" && Time.time > nextFrame)
 				{
-					frameRate = 0.1f;
+					frameRate = averageSpeed/10;
 					nextFrame = Time.time + frameRate;
 
 					if(frameNum == 1)

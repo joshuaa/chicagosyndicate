@@ -8,7 +8,6 @@ public class Controller : MonoBehaviour
 	private Animator animator;
 
 	public GameObject bullet;
-	public GameObject crosshair;
 	public GameObject sprite;
 	public GameController gc;
 	public Vector3 mouse;
@@ -17,11 +16,12 @@ public class Controller : MonoBehaviour
 
 	private float x;
 	private float y;
+	private float aimingRotation;
 	private float h;
 	private float v;
 
-	public enum ControlType { crammedKeyboard = 0, hotlineMiami = 1, xbox = 2}
-	public ControlType ct = ControlType.crammedKeyboard;
+	public enum ControlType { xbox = 0, crammedKeyboard = 1}
+	public ControlType ct = ControlType.xbox;
 
 	void Start()
 	{
@@ -36,27 +36,26 @@ public class Controller : MonoBehaviour
 		if(ct == ControlType.crammedKeyboard)
 		{
 			if(ps.playerSlot == 1)
-				P1CK();
+				P1CrammedKeyboard();
 			if(ps.playerSlot == 2)
-				P2CK();
+				P2CrammedKeyboard();
 			if(ps.playerSlot == 3)
-				P3CK();
+				P3CrammedKeyboard();
 			if(ps.playerSlot == 4)
-				P4CK();
+				P4CrammedKeyboard();
 		}
 
-		//controlls if xbox controller for player1 only
-		if(ct == ControlType.hotlineMiami)
-		{
-			if(ps.playerSlot == 1)
-				P1HM();
-		}
-
-		//controlls if xbox controller for other players
+		//controlls if xbox controller
 		if(ct == ControlType.xbox)
 		{
 			if(ps.playerSlot == 1)
-				P1XB();
+				P1XBbox();
+			if(ps.playerSlot == 2)
+				P2XBbox();
+			if(ps.playerSlot == 3)
+				P3XBbox();
+			if(ps.playerSlot == 4)
+				P4XBbox();
 		}
 	}
 
@@ -69,13 +68,11 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	public void P1CK()
+	public void P1CrammedKeyboard()
 	{
 		//WASD controls for Player1 movement
 		//X to shoot
 		
-		//destroy crosshair, it's unnecesary 
-		Destroy(crosshair);
 		//right(d)
 		if(Input.GetKey(KeyCode.D))
 		{
@@ -114,7 +111,7 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	public void P2CK()
+	public void P2CrammedKeyboard()
 	{
 		//TFGH controls for Player2 movement
 		//V to shoot
@@ -157,7 +154,7 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	public void P3CK()
+	public void P3CrammedKeyboard()
 	{
 		//IJKL controls for Player2 movement
 		//M to shoot
@@ -200,7 +197,7 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	public void P4CK()
+	public void P4CrammedKeyboard()
 	{
 		//Arrow Keys for Player3 movement
 		//Right Shift to shoot
@@ -243,35 +240,37 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	public void P1HM()
+	public void P1XBbox()
 	{
-		h = Input.GetAxis("Horizontal")*weapon.movementSpeed*Time.deltaTime;
-		v = Input.GetAxis("Vertical")*weapon.movementSpeed*Time.deltaTime;
-		x += (Input.GetAxis("Mouse X")*20)*Time.deltaTime;
-		y += (Input.GetAxis("Mouse Y")*20)*Time.deltaTime;
-		mouse = new Vector3 (x,1,y);
+		h = Mathf.Clamp(Input.GetAxis("P1 Left Thumbstick Horizontal"),-0.5f,0.5f)*Time.deltaTime*7.5f;
+		v = -Mathf.Clamp(Input.GetAxis("P1 Left Thumbstick Vertical"), -0.5f, 0.5f)*Time.deltaTime*7.5f;
+		x = Input.GetAxis("P1 Right Thumbstick Horizontal");
+		y = Input.GetAxis("P1 Right Thumbstick Vertical");
 
-		crosshair.transform.position = mouse + new Vector3(0,3,0);
-		//rigidbody.rotation = sprite.transform.rotation;
-		transform.Translate(h,0,v);
-		//sprite.transform.rotation = Quaternion.Euler(0,sprite.transform.rotation.y,0);
-		sprite.transform.LookAt(mouse);
-		if(Input.GetButton("Fire1"))
+		if(x > 0.3f || y > 0.3f || x < -0.3f || y < -0.3f)
 		{
-			if(weapon.weaponName == "hands")
-			{
-
-			}
-			else
-			{
-				Shoot();
-			}
+			if(x > 0)
+				aimingRotation = Mathf.Atan(y/x)* Mathf.Rad2Deg + 90;
+			if(x < 0)
+				aimingRotation = Mathf.Atan(y/x)* Mathf.Rad2Deg - 90;
 		}
+		if(Input.GetAxis("P1 Triggers") < -0.1f && weapon.weaponName != "hands")
+			Shoot();
+		//Debug.Log(aimingRotation);
+
+		transform.Translate(h,0,v);
+		sprite.transform.rotation = Quaternion.Euler(0,aimingRotation,0);
 	}
 
-	public void P1XB()
+	public void P2XBbox()
 	{
-		//destroy crosshair, it's unnecesary 
-		Destroy(crosshair);
+	}
+
+	public void P3XBbox()
+	{
+	}
+
+	public void P4XBbox()
+	{
 	}
 }

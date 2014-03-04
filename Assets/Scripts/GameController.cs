@@ -58,9 +58,9 @@ public class GameController : MonoBehaviour
 
 			winnerText.color = Color.white;
 			winnerText.text = whoWon + " IS THE WINNER!";
-			restartText.text = "Press R for a rematch!";
+			restartText.text = "Press START for a rematch!";
 			Time.timeScale = 0.1f;
-			if(Input.GetKeyDown(KeyCode.R))
+			if(Input.GetButtonDown("P1 Start Button"))
 			{
 				Time.timeScale = 1f;
 				Application.LoadLevel(Application.loadedLevel);

@@ -14,9 +14,16 @@ public class Weapon : MonoBehaviour
 	{
 		if(weaponName == "thompson")
 		{
+			fireRate = 0.15f;
+			totalRounds = 20;
+			movementSpeed = 5;
+			roundsLeft = 20;
+		}
+		if(weaponName == "mpk")
+		{
 			fireRate = 0.1f;
 			totalRounds = 30;
-			movementSpeed = 5;
+			movementSpeed = 6;
 			roundsLeft = 30;
 		}
 		if(weaponName == "revolver")

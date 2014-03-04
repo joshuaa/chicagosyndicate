@@ -36,8 +36,6 @@ public class PlayerDie : MonoBehaviour
 		if(playerSlot.playerSlot == 1 && (otherThing.gameObject.tag == "p2bullet" || otherThing.gameObject.tag == "p3bullet" || otherThing.gameObject.tag == "p4bullet"))
 		{
 			gameController.playerCount -= 1;
-			if(controller.crosshair != null)
-				Destroy(controller.crosshair);
 			Destroy(gameObject);
 		}
 		if(playerSlot.playerSlot == 2 && (otherThing.gameObject.tag == "p1bullet" || otherThing.gameObject.tag == "p3bullet" || otherThing.gameObject.tag == "p4bullet"))
